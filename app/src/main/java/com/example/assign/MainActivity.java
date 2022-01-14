@@ -10,30 +10,26 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText phone, pass;
-    String sphone, spass;
+    EditText bloodGroup;
+    String sBloodGroup;
     DbHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        phone = findViewById(R.id.number1);
-        pass = findViewById(R.id.password1);
+        bloodGroup = findViewById(R.id.number1);
         dbHelper = new DbHelper(this);
     }
 
-    public void signin(View view) {
-        sphone = phone.getText().toString();
-        spass = pass.getText().toString();
-        String pass2 = dbHelper.getPassword(sphone);
-        String check = pass2 + " = " + spass;
-        Toast.makeText(getApplicationContext(), check, Toast.LENGTH_SHORT).show();
-        if(pass2.equals(spass)) {
+    public void search(View view) {
+        sBloodGroup = bloodGroup.getText().toString();
+        if(dbHelper.bgPresent(sBloodGroup)) {
             Intent intent= new Intent(MainActivity.this, HomePage.class);
+            intent.putExtra("blood", sBloodGroup);
             startActivity(intent);
         } else {
-            Toast.makeText(getApplicationContext(), "User not found!!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), sBloodGroup + " Bloodgroup not found!!", Toast.LENGTH_SHORT).show();
         }
     }
 

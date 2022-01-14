@@ -13,27 +13,20 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:hint="Number" />
+        android:hint="Blood Group" />
 
-    <EditText
-        android:id="@+id/password1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Password" />
 
     <Button
         android:id="@+id/signin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="signin"
-        android:text="Sign IN" />
+        android:onClick="search"
+        android:text="Search" />
 
     <Button
         android:id="@+id/signup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="signup"
-        android:text="Sign UP" />
+        android:text="Register" />
 </LinearLayout>

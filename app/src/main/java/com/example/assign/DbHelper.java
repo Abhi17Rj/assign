@@ -6,18 +6,21 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DbHelper extends SQLiteOpenHelper {
 
     SQLiteDatabase sqLiteDatabase;
 
     public DbHelper(Context context) {
-        super(context, "details.db", null, 1);
+        super(context, "bloodbank.db", null, 1);
         sqLiteDatabase = getWritableDatabase();
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table users (phone text, password text, name text, location text)");
+        db.execSQL("create table users (name text, location text, bloodgroup text)");
     }
 
     @Override
@@ -25,47 +28,49 @@ public class DbHelper extends SQLiteOpenHelper {
 
     }
 
-    public void savedata(String phone, String password, String name, String loc){
+    public void savedata(String name, String loc, String bg){
 
         ContentValues cv = new ContentValues();
-        cv.put("phone",phone);
-        cv.put("password",password);
         cv.put("name",name);
         cv.put("location",loc);
+        cv.put("bloodgroup",bg);
 
         sqLiteDatabase.insert("users",null,cv);
 
     }
 
-    public String getPassword(String sn2) {
+    public boolean bgPresent(String sn2) {
         Cursor c;
-        c= sqLiteDatabase.query("users",null,"phone=?",new String[]{sn2},
+        c= sqLiteDatabase.query("users",null,"bloodgroup=?",new String[]{sn2},
                 null,null,null);
 
         c.moveToFirst();
 
         if(c.getCount()<1){
-            return "not exist";
+            return false;
         }
-
-        String v = c.getString(c.getColumnIndex("password"));
-
-        return v;
+        return  true;
     }
 
-    public String getName(String sn2) {
+    public List<String> getUsers(String sn2) {
         Cursor c;
-        c= sqLiteDatabase.query("users",null,"phone=?",new String[]{sn2},
+        c= sqLiteDatabase.query("users",null,"bloodgroup=?",new String[]{sn2},
                 null,null,null);
 
-        c.moveToFirst();
+        List<String> list=new ArrayList<>();
+        //c.moveToFirst();
 
-        if(c.getCount()<1){
-            return "not exist";
+        if (c.moveToFirst()) {
+            do {
+
+                list.add(c.getString(c.getColumnIndex("name")));
+                list.add(c.getString(c.getColumnIndex("location")));
+                list.add(c.getString(c.getColumnIndex("bloodgroup")));
+                // cursor.moveToNext();
+
+            } while (c.moveToNext());
         }
 
-        String v = c.getString(c.getColumnIndex("name"));
-
-        return v;
+        return list;
     }
 }

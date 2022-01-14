@@ -8,22 +8,6 @@
     tools:context=".SignUpPage">
 
     <EditText
-        android:id="@+id/number2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Number" />
-
-    <EditText
-        android:id="@+id/password2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Password" />
-
-    <EditText
         android:id="@+id/name2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,17 +16,26 @@
         android:hint="Name" />
 
     <EditText
-        android:id="@+id/location"
+        android:id="@+id/loc2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="Location" />
 
+    <EditText
+        android:id="@+id/bg2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="BloodGroup" />
+
+
     <Button
         android:id="@+id/save"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="save"
-        android:text="Save" />
+        android:text="Register" />
 </LinearLayout>
